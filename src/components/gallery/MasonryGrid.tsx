@@ -17,7 +17,7 @@ export default function MasonryGrid() {
       className={styles.masonryGrid}
       columnClassName={styles.masonryGridColumn}
     >
-      {gallery.images.map((image, index) => (
+      {(gallery.images as { src: string; alt: string; orientation: string }[]).map((image, index) => (
         <Media
           priority={index < 10}
           sizes="(max-width: 560px) 100vw, 50vw"

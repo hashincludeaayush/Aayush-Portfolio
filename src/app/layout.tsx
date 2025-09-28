@@ -1,6 +1,7 @@
 import '@once-ui-system/core/css/styles.css';
 import '@once-ui-system/core/css/tokens.css';
 import '@/resources/custom.css'
+import { Analytics } from "@vercel/analytics/next"
 
 import classNames from "classnames";
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  
 }>) {
   return (
     <Flex
@@ -156,6 +158,7 @@ export default async function RootLayout({
             <Footer/>
           </Column>
         </Providers>
+        <Analytics />
       </Flex>
   );
 }

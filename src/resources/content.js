@@ -86,13 +86,17 @@ const about = {
   intro: {
     display: true,
     title: "Introduction",
-    description: (
-      <>Aayush Singh is a Software Engineer at HCLTech working as a Data Analyst/Consultant for the client - MRC Global, with over four years of professional experience. He specializes in data analysis and application development, utilizing a range of technologies including Power BI, Power Automate, Snowflake, Informatica, and Oracle BIP to create dashboards, reports, and ETL pipelines.
-
-Throughout his career, Aayush has demonstrated a significant impact on productivity and value creation. He has generated over $750,000 in value for HCLTech by implementing power automations and developing Power Apps. While assigned to the client - Chevron, he received an award for automations that resulted in over $160,000 in value. His technical expertise also includes SharePoint support and migration, where he resolved over 2,000 support tickets and handled complex data migrations using tools like Metalogix Content Matrix.
-
-Aayush holds multiple industry certifications, including AWS Certified Developer – Associate and Microsoft Azure Cloud Developer. He is currently pursuing a Bachelor of Science in Design and Computing from the Birla Institute of Technology and Science, Pilani.</>
-    ),
+description: (
+  <>
+    Aayush Singh is a Software Engineer at HCLTech working as a Data Analyst/Consultant for the client - MRC Global, with over four years of professional experience. He specializes in data analysis and application development, utilizing a range of technologies including Power BI, Power Automate, Snowflake, Informatica, and Oracle BIP to create dashboards, reports, and ETL pipelines.
+    <br />
+    <br />
+    Throughout his career, Aayush has demonstrated a significant impact on productivity and value creation. He has generated over $750,000 in value for HCLTech by implementing power automations and developing Power Apps. While assigned to the client - Chevron, he received an award for automations that resulted in over $160,000 in value. His technical expertise also includes SharePoint support and migration, where he resolved over 2,000 support tickets and handled complex data migrations using tools like Metalogix Content Matrix.
+    <br />
+    <br />
+    Aayush holds multiple industry certifications, including AWS Certified Developer – Associate and Microsoft Azure Cloud Developer. He is currently pursuing a Bachelor of Science in Design and Computing from the Birla Institute of Technology and Science, Pilani.
+  </>
+),
   },
   work: {
     display: true,
@@ -103,7 +107,7 @@ Aayush holds multiple industry certifications, including AWS Certified Developer
         timeframe: "Jun 2024 - Present",
         role: "Data Analyst / Consultant",
         achievements: [
-          <>Creating Power BI dashboards, Power Automations, and ETL pipelines using Informatica, Oracle, and Snowflake.</>,
+          <>Creating Power BI dashboards, Power Automations, and ETL pipelines using Informatica, Power Automate, Oracle BIP and Snowflake.</>,
         ],
         images: [],
       },
@@ -112,8 +116,11 @@ Aayush holds multiple industry certifications, including AWS Certified Developer
         timeframe: "Feb 2023 - Jun 2024",
         role: "Software Developer (Australian Business Unit)",
         achievements: [
-          <>Received a client award for automations generating over $160,000 in value.</>,
-          <>Delivered Mailbox and O:Drive migrations using Metalogix Content Matrix.</>,
+          <>Awarded by business/client i.e., Chevron for implementing automations in ABU which generated over $160,000 in HCLTech's Value Creation Portal.</>,
+          <>Successfully designed and deployed multiple automations by building sophisticated Power Automate flows to drive efficiency. Key automations includes integrating the ServiceNow Platform using ServiceNow APIs, PowerShell and Azure APIs to automate ticket creation, bridging separate platforms and eliminating manual work. Additional automations were created for critical SharePoint Online governance tasks, such as a flow to restore deleted documents from multiple stages of SharePoint Online sites, a system for sending automated SharePoint cleanup notifications for sites and a process for automatically applying data retention labels to sites.</>,
+          <>Developed new business applications from scratch using Power Apps, including a Customer Feedback tool and a centralized Apps and Dashboards Launcher. Modernized existing Power Apps by overhauling outdated user interfaces / UI/UX to modern standards i.e., Neumorphism, Glassmorphism, etc and implementing various functional changes & operational improvements in those applications.</>,
+          <>Performed comprehensive administrative tasks, including a complete audit and update of the ABU Site Register to ensure data accuracy. Configured essential SharePoint structures like Security Pages and content types to enforce proper governance and usability across the environment.</>,
+          <>Apart from successful migration of over 2.5 terabytes of data into SharePoint Online sites, also successfully delivered Mailbox Migration and O:Drive Migrations in ABU. These complex process involved meticulous data preparation, including cleansing thousands of file names to ensure success, and utilizing industry-standard migration tools like Metalogix Content Matrix Public Folder Edition.</>,
         ],
         images: [{
                         src: '/images/projects/certchev.jpg',
@@ -122,7 +129,7 @@ Aayush holds multiple industry certifications, including AWS Certified Developer
                         height: 9
                     },
                   {
-                        src: '/images/projects/certchev2.jfif',
+                        src: '/images/projects/certchev2.jpg',
                         alt: 'Project image',
                         width: 17,
                         height: 11

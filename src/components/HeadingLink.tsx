@@ -12,7 +12,12 @@ interface HeadingLinkProps {
   style?: React.CSSProperties;
 }
 
-export const HeadingLink: React.FC<HeadingLinkProps> = ({ id, level, children, style }) => {
+export const HeadingLink: React.FC<HeadingLinkProps> = ({
+  id,
+  level,
+  children,
+  style,
+}) => {
   const { addToast } = useToast();
 
   const copyURL = (id: string): void => {
@@ -43,7 +48,7 @@ export const HeadingLink: React.FC<HeadingLinkProps> = ({ id, level, children, s
   } as const;
 
   const variant = variantMap[level];
-  const asTag = `h${level}` as keyof JSX.IntrinsicElements;
+  const asTag = `h${level}` as keyof React.JSX.IntrinsicElements;
 
   return (
     <Flex

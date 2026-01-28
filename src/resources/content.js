@@ -15,7 +15,7 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Subscribe to {person.firstName}&apos;s Newsletter</>,
   description: (
     <>
       I occasionally write about data analysis, application development, and
@@ -62,7 +62,7 @@ const home = {
   },
   subline: (
     <>
-      I'm Aayush, a Software Engineer at HCLTech working as a Data Analyst for
+      I&apos;m Aayush, a Software Engineer at HCLTech working as a Data Analyst for
       the client - MRC Global.
       <br />I specialize in developing BI dashboards, automation solutions, and
       ETL pipelines.
@@ -215,7 +215,7 @@ const about = {
             Awarded by business/client i.e., Chevron for implementing{" "}
             <strong>automations in ABU</strong> which generated over{" "}
             <strong>$160,000</strong> in{" "}
-            <strong>HCLTech's Value Creation Portal</strong>.
+            <strong>HCLTech&apos;s Value Creation Portal</strong>.
           </>,
           <>
             Successfully designed and deployed multiple automations by building
@@ -314,7 +314,7 @@ const about = {
         achievements: [
           <>
             Defined and executed the <strong>technical strategy and architecture</strong> for
-            the startup's entire digital ecosystem, encompassing the development
+            the startup&apos;s entire digital ecosystem, encompassing the development
             of multiple high-performance <strong>websites and mobile applications</strong>
             for Shobbr’s primary domains and sub-domains.
           </>,
@@ -349,7 +349,7 @@ const about = {
       },
       {
         name: "HCLTech",
-        description: <>Techbee - HCL's Early Career Program (2020 - 2021)</>,
+        description: <>Techbee - HCL&apos;s Early Career Program (2020 - 2021)</>,
       },
       {
         name: "Key Certifications",

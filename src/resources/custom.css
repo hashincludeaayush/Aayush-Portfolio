@@ -124,14 +124,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  isolation: isolate;
   background:
-    radial-gradient(circle at 30% 20%, rgba(40, 20, 70, 0.55), rgba(0, 0, 0, 0.0) 55%),
-    radial-gradient(circle at 70% 80%, rgba(20, 60, 80, 0.45), rgba(0, 0, 0, 0.0) 60%),
-    rgba(0, 0, 0, 0.62);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+    radial-gradient(circle at 30% 20%, rgba(40, 20, 70, 0.82), rgba(0, 0, 0, 0.0) 55%),
+    radial-gradient(circle at 70% 80%, rgba(20, 60, 80, 0.76), rgba(0, 0, 0, 0.0) 60%),
+    rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
   opacity: 1;
   transition: opacity 220ms ease;
+}
+
+.routeOverlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Extra dim layer so the page behind is barely visible */
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 0;
 }
 
 .routeOverlay.isFading {
@@ -139,6 +149,8 @@
 }
 
 .routeOverlayInner {
+  position: relative;
+  z-index: 1;
   width: min(360px, 86vw);
   padding: 20px 18px;
   border-radius: 18px;

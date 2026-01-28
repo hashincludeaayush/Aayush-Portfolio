@@ -3,11 +3,19 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { routes, protectedRoutes } from "@/resources";
-import { Flex, Spinner, Button, Heading, Column, PasswordInput } from "@once-ui-system/core";
+import {
+  Flex,
+  Spinner,
+  Button,
+  Heading,
+  Column,
+  PasswordInput,
+} from "@once-ui-system/core";
 import NotFound from "@/app/not-found";
+import { RouteLoadingIndicator } from "@/components/RouteLoadingIndicator";
 
 interface RouteGuardProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
@@ -18,8 +26,12 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const [transitionActive, setTransitionActive] = useState(false);
 
   useEffect(() => {
+    // Route changed (or first mount): show the top loader immediately.
+    if (pathname) setTransitionActive(true);
+
     const performChecks = async () => {
       setLoading(true);
       setIsRouteEnabled(false);
@@ -56,6 +68,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
       }
 
       setLoading(false);
+      setTransitionActive(false);
     };
 
     performChecks();
@@ -78,37 +91,53 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 
   if (loading) {
     return (
-      <Flex fillWidth paddingY="128" horizontal="center">
-        <Spinner />
-      </Flex>
+      <>
+        <RouteLoadingIndicator active={loading || transitionActive} />
+        <Flex fillWidth paddingY="128" horizontal="center">
+          <Spinner />
+        </Flex>
+      </>
     );
   }
 
   if (!isRouteEnabled) {
-		return <NotFound />;
-	}
-
-  if (isPasswordRequired && !isAuthenticated) {
     return (
-      <Column paddingY="128" maxWidth={24} gap="24" center>
-        <Heading align="center" wrap="balance">
-          This page is password protected
-        </Heading>
-        <Column fillWidth gap="8" horizontal="center">
-          <PasswordInput
-            id="password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            errorMessage={error}
-          />
-          <Button onClick={handlePasswordSubmit}>Submit</Button>
-        </Column>
-      </Column>
+      <>
+        <RouteLoadingIndicator active={loading || transitionActive} />
+        <NotFound />
+      </>
     );
   }
 
-  return <>{children}</>;
+  if (isPasswordRequired && !isAuthenticated) {
+    return (
+      <>
+        <RouteLoadingIndicator active={loading || transitionActive} />
+        <Column paddingY="128" maxWidth={24} gap="24" center>
+          <Heading align="center" wrap="balance">
+            This page is password protected
+          </Heading>
+          <Column fillWidth gap="8" horizontal="center">
+            <PasswordInput
+              id="password"
+              label="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              errorMessage={error}
+            />
+            <Button onClick={handlePasswordSubmit}>Submit</Button>
+          </Column>
+        </Column>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <RouteLoadingIndicator active={loading || transitionActive} />
+      {children}
+    </>
+  );
 };
 
 export { RouteGuard };

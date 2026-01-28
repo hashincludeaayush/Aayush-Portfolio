@@ -1,13 +1,27 @@
-import '@once-ui-system/core/css/styles.css';
-import '@once-ui-system/core/css/tokens.css';
-import '@/resources/custom.css'
-import { Analytics } from "@vercel/analytics/next"
+import "@once-ui-system/core/css/styles.css";
+import "@once-ui-system/core/css/tokens.css";
+import "@/resources/custom.css";
+import { Analytics } from "@vercel/analytics/next";
 
 import classNames from "classnames";
 
-import { Background, Column, Flex, Meta, opacity, SpacingToken } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from '@/components';
-import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
+import {
+  Background,
+  Column,
+  Flex,
+  Meta,
+  opacity,
+  SpacingToken,
+} from "@once-ui-system/core";
+import {
+  Footer,
+  Header,
+  RouteGuard,
+  Providers,
+  MusicPlayer,
+} from "@/components";
+import { RouteTransitionOverlay } from "@/components/RouteTransitionOverlay";
+import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -23,7 +37,6 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  
 }>) {
   return (
     <Flex
@@ -54,12 +67,12 @@ export default async function RootLayout({
                     accent: style.accent,
                     neutral: style.neutral,
                     solid: style.solid,
-                    'solid-style': style.solidStyle,
+                    "solid-style": style.solidStyle,
                     border: style.border,
                     surface: style.surface,
                     transition: style.transition,
                     scaling: style.scaling,
-                    'viz-style': dataStyle.variant,
+                    "viz-style": dataStyle.variant,
                   })};
                   
                   // Apply default values
@@ -97,8 +110,17 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <Providers>
-        <Column as="body" background="page" fillWidth style={{minHeight: "100vh"}} margin="0" padding="0" horizontal="center">
+      <Column
+        as="body"
+        background="page"
+        fillWidth
+        style={{ minHeight: "100vh" }}
+        margin="0"
+        padding="0"
+        horizontal="center"
+      >
+        <Providers>
+          <RouteTransitionOverlay minDurationMs={4500} />
           <Background
             position="fixed"
             mask={{
@@ -140,25 +162,19 @@ export default async function RootLayout({
               color: effects.lines.color,
             }}
           />
-          <Flex fillWidth minHeight="16" hide="s"/>
-            <Header />
-            <Flex
-              zIndex={0}
-              fillWidth
-              padding="l"
-              horizontal="center"
-              flex={1}
-            >
-              <Flex horizontal="center" fillWidth minHeight="0">
-                <RouteGuard>
-                  {children}
-                </RouteGuard>
-              </Flex>
+          <Flex fillWidth minHeight="16" hide="s" />
+          <Header />
+          <div className="mobileHeaderSpacer" aria-hidden="true" />
+          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+            <Flex horizontal="center" fillWidth minHeight="0">
+              <RouteGuard>{children}</RouteGuard>
             </Flex>
-            <Footer/>
-          </Column>
+          </Flex>
+          <Footer />
+          <MusicPlayer />
+          <Analytics />
         </Providers>
-        <Analytics />
-      </Flex>
+      </Column>
+    </Flex>
   );
 }

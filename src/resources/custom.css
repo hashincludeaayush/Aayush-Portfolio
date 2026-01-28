@@ -52,3 +52,300 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+/* Mobile: offset page content for the fixed top header */
+.mobileHeaderSpacer {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileHeaderSpacer {
+    display: block;
+    /* header top offset + header height + extra breathing room (+ safe area) */
+    height: calc(env(safe-area-inset-top, 0px) + 120px);
+  }
+}
+
+/* Route transition loader (global) */
+.routeLoader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.routeLoaderBar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, #22d3ee 0%, #a78bfa 45%, #ff4d4f 100%);
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.35),
+    0 0 18px rgba(167, 139, 250, 0.22);
+  opacity: 0.95;
+}
+
+.routeLoaderBar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 220px 100%;
+  animation: routeLoaderShimmer 0.95s linear infinite;
+  mix-blend-mode: overlay;
+  opacity: 0.65;
+}
+
+.routeLoaderBar.isFinishing {
+  transition: transform 180ms ease-out, opacity 180ms ease-out;
+  opacity: 0.0;
+}
+
+@keyframes routeLoaderShimmer {
+  from { background-position: -220px 0; }
+  to { background-position: calc(100% + 220px) 0; }
+}
+
+/* Full-page route transition overlay */
+.routeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 25000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(40, 20, 70, 0.55), rgba(0, 0, 0, 0.0) 55%),
+    radial-gradient(circle at 70% 80%, rgba(20, 60, 80, 0.45), rgba(0, 0, 0, 0.0) 60%),
+    rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+
+.routeOverlay.isFading {
+  opacity: 0;
+}
+
+.routeOverlayInner {
+  width: min(360px, 86vw);
+  padding: 20px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(10, 12, 18, 0.82), rgba(6, 7, 10, 0.76));
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.routeOverlayBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 12, 18, 0.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.routeOverlayIcon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(49, 46, 129, 0.55), rgba(88, 28, 135, 0.55));
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.routeOverlayBadgeText {
+  font-family: var(--font-label, var(--font-body, system-ui, -apple-system, Segoe UI, sans-serif));
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.routeSpinner {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from 0deg,
+      #0b1020,
+      #1b1b3a,
+      #312e81,
+      #581c87,
+      #0b1020
+    );
+  -webkit-mask: radial-gradient(farthest-side, transparent 62%, #000 64%);
+  mask: radial-gradient(farthest-side, transparent 62%, #000 64%);
+  animation: routeSpin 0.9s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(88, 28, 135, 0.25));
+}
+
+@keyframes routeSpin {
+  to { transform: rotate(360deg); }
+}
+
+.routeOverlayText {
+  font-family: var(--font-label, var(--font-body, system-ui, -apple-system, Segoe UI, sans-serif));
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+}
+
+.routeOverlayLoaderCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(8, 9, 12, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+}
+
+.routeOverlaySkeletonAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  flex: none;
+  background:
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  background-size: 260px 100%;
+  animation: routeSkeletonShimmer 1.05s linear infinite;
+}
+
+.routeOverlaySkeletonBody {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.routeOverlaySkeletonLine {
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  background-size: 320px 100%;
+  animation: routeSkeletonShimmer 1.05s linear infinite;
+}
+
+.routeOverlaySkeletonLine.isLong { width: 92%; }
+.routeOverlaySkeletonLine.isShort { width: 62%; }
+
+@keyframes routeSkeletonShimmer {
+  from { background-position: -320px 0; }
+  to { background-position: calc(100% + 320px) 0; }
+}
+
+
+.routeOverlayCards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+@media (min-width: 420px) {
+  .routeOverlayCards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.routeOverlayCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(8, 9, 12, 0.45);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.30);
+}
+
+.routeOverlayThumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  flex: none;
+}
+
+.routeOverlayCardMeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.routeOverlayCardTitle {
+  font-family: var(--font-label, var(--font-body, system-ui, -apple-system, Segoe UI, sans-serif));
+  font-weight: 650;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routeOverlayCardSub {
+  font-family: var(--font-body, system-ui, -apple-system, Segoe UI, sans-serif);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routeOverlayTopBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0b1020 0%, #312e81 50%, #581c87 100%);
+  opacity: 0.92;
+  box-shadow: 0 0 16px rgba(49, 46, 129, 0.25);
+}
